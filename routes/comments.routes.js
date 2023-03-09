@@ -8,7 +8,7 @@ router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
   try {
     const response = await Comment.find({ post: req.params.id }).select(
       "content author time"
-    );
+    ).populate("author", "username")
     res.json(response);
     console.log(response);
   } catch (error) {
@@ -30,6 +30,7 @@ router.post("/:id/comments", isAuthenticated, async (req, res, next) => {
       post: responsePost._id,
     });
     res.json(responseComments);
+    console.log(responseComments);
   } catch (error) {
     next(error);
   }
