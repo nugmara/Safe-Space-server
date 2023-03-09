@@ -13,7 +13,6 @@ const post = new mongoose.Schema(
     likes: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      default: [],
     },
     totalLikes: {
       type: Number,
@@ -25,6 +24,10 @@ const post = new mongoose.Schema(
         ref: "Comment",
       },
     ],
+    time: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     timestamps: true,
@@ -33,4 +36,4 @@ const post = new mongoose.Schema(
 
 const Post = mongoose.model("Post", post);
 
-module.exports = Post
+module.exports = Post;
