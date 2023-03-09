@@ -14,6 +14,10 @@ const comment = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
     },
+    time: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     timestamps: true,
@@ -22,4 +26,4 @@ const comment = new mongoose.Schema(
 
 const Comment = mongoose.model("Comment", comment);
 
-module.exports = Comment
+module.exports = Comment;

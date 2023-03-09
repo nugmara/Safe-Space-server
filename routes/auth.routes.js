@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const isAuthenticated = require("../middlewares/auth.middlewares");
 const User = require("../models/User.model");
 
-// POST "/api/suth/signup" => Registrar al usuario en la BD
+// POST "/api/auth/signup" => Registrar al usuario en la BD
 router.post("/signup", async (req, res, next) => {
   const { username, firstName, lastName, image, email, password } = req.body;
   // Validación del BE
