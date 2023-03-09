@@ -13,7 +13,8 @@ const userSchema = new Schema(
     image: {
       type: String,
       default: "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678358203/safe-space-app/default-picture_lntg3k.png",
-      enum: ["https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357943/safe-space-app/Ice-Age-Avatars-1_yeuzft.webp",
+      enum: [
+    "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357943/safe-space-app/Ice-Age-Avatars-1_yeuzft.webp",
     "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357943/safe-space-app/Ice-Age-Avatars-2_jamxw0.webp",
     "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357943/safe-space-app/Ice-Age-Avatars-3_zzrpeh.webp",
     "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357944/safe-space-app/Ice-Age-Avatars-4_nl5y36.webp",
@@ -25,7 +26,7 @@ const userSchema = new Schema(
     "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357944/safe-space-app/The-Simpsons-Profile-Icons-5_audpk8.webp",
     "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357944/safe-space-app/The-Simpsons-Profile-Icons-6_xy9cga.webp",
     "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678357944/safe-space-app/The-Simpsons-Profile-Icons-7_yfemuk.webp"
-    ]
+  ]
     },
     email: {
       type: String,
