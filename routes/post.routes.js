@@ -1,5 +1,6 @@
 const isAuthenticated = require("../middlewares/auth.middlewares");
 const Post = require("../models/Post.model");
+const User = require("../models/User.model");
 
 const router = require("express").Router();
 
@@ -8,7 +9,7 @@ router.get("/", async (req, res, next) => {
   try {
     const response = await Post.find().select(
       "content authorId likes totalLikes time"
-    );
+    ).populate("authorId", "username")
     res.json(response);
   } catch (error) {
     next(error);
@@ -33,7 +34,9 @@ router.post("/", isAuthenticated, async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
-    const response = await Post.findById(id);
+    const response = await Post.findById(id).select(
+      "content authorId likes totalLikes time"
+    ).populate("authorId", "username")
     res.json(response);
   } catch (error) {
     next(error);
@@ -41,14 +44,38 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // DELETE "/api/post/delete" => borrar un post por su id
-router.delete("/:id", async(req, res, next) => {
-    const {id} = req.params;
-    try {
-        await Post.findByIdAndDelete(id)
-        res.json("borrado")
-    } catch (error) {
-        next(error)
+router.delete("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await Post.findByIdAndDelete(id);
+    res.json("borrado");
+  } catch (error) {
+    next(error);
+  }
+});
+
+// !
+// Tenemos que definir una ruta para dar like a un post
+router.post("/:id/like", async (req, res, next) => {
+  console.log(req.body)
+  const { id } = req.params;
+  const { userId } = req.body;
+  console.log(req.body)
+  try {
+    const response = await Post.findById(id);
+    if (!response.likes.includes(userId)) {
+      response.likes.push(userId);
+      response.totalLikes += 1
+      await response.save();
+    } else {
+      response.likes.pull(userId)
+      response.totalLikes -= 1
+      await response.save()
     }
-})
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

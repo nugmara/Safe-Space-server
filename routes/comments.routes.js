@@ -6,9 +6,10 @@ const Post = require("../models/Post.model");
 // GET "/api/post/:id/comments" => para enviar la lista de los comentarios
 router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
   try {
-    const response = await Comment.find({ post: req.params.id }).select(
+    const response = await Comment.find({ post: req.params._id }).select(
       "content author time"
     ).populate("author", "username")
+    
     res.json(response);
     console.log(response);
   } catch (error) {
@@ -19,15 +20,17 @@ router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
 // POST "/api/post/:id/comments" => para crear un nuevo comentario
 router.post("/:id/comments", isAuthenticated, async (req, res, next) => {
   const { content } = req.body;
+  const {id}= req.params
   try {
-    const responsePost = await Post.findById(req.params.id);
+    const responsePost = await Post.findById(id);
+     console.log(responsePost)
     if (!responsePost) {
       return res.status(404).json({ errorMessage: "Post not found" });
     }
     const responseComments = await Comment.create({
       content: content,
-      author: req.payload._id,
-      post: responsePost._id,
+      author: req.payload.id,
+      post: responsePost.id,
     });
     res.json(responseComments);
     console.log(responseComments);
