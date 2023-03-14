@@ -22,4 +22,10 @@ router.use("/notifications", notificationsRoutes)
 const searchForUsers = require("./search.routes")
 router.use("/search", searchForUsers)
 
+const followUsers = require("./following.routes")
+router.use("/follow", followUsers)
+
+const profileRoutes = require("./profile.routes")
+router.use("/profile", profileRoutes)
+
 module.exports = router;
