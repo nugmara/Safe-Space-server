@@ -16,4 +16,7 @@ router.use("/post", commentsRoutes)
 const chatRoutes = require("./chat.routes")
 router.use("/chats", chatRoutes)
 
+const notificationsRoutes = require("./notifications.routes")
+router.use("/notifications", notificationsRoutes)
+
 module.exports = router;
