@@ -1,4 +1,4 @@
-const Notifications = require("../models/Notifications");
+const Notifications = require("../models/Patata");
 const User = require("../models/User.model");
 const router = require("express").Router();
 const isAuthenticated = require("../middlewares/auth.middlewares");
