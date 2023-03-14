@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const notifications = new mongoose.Schema({
   title: {
     type: String,
-    required: true
+    // required: true
   },
   message: {
     type: String,
-    required: true
+    // required: true
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true
+    // required: true
   },
   isTheNotificationRead: {
     type: Boolean,

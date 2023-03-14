@@ -19,4 +19,7 @@ router.use("/chats", chatRoutes)
 const notificationsRoutes = require("./notifications.routes")
 router.use("/notifications", notificationsRoutes)
 
+const searchForUsers = require("./search.routes")
+router.use("/search", searchForUsers)
+
 module.exports = router;

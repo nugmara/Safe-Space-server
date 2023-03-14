@@ -62,6 +62,7 @@ router.post("/:id/like", async (req, res, next) => {
   const { userId } = req.body;
   console.log(req.body)
   try {
+  
     const response = await Post.findById(id);
     if (!response.likes.includes(userId)) {
       response.likes.push(userId);
@@ -72,6 +73,8 @@ router.post("/:id/like", async (req, res, next) => {
       response.totalLikes -= 1
       await response.save()
     }
+    const authorOfThePost = response.authorId
+    
     res.json(response);
   } catch (error) {
     next(error);

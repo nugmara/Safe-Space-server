@@ -19,7 +19,7 @@ router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
 // POST "/api/post/:id/comments" => para crear un nuevo comentario
 router.post("/:id/comments", isAuthenticated, async (req, res, next) => {
   const { content } = req.body;
-  const {id}= req.params
+  const {id} = req.params
   console.log(req.payload)
   try {
     const responsePost = await Post.findById(id);
