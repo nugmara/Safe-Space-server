@@ -26,7 +26,7 @@ const userSchema = new Schema(
       required: [true, 'Password is required.']
     },
     description: String,
-    followers: {
+    follow: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
@@ -34,6 +34,10 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    totalFollowers: {
+      type: Number,
+      default: 0
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    

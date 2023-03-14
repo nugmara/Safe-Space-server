@@ -21,25 +21,28 @@ router.get("/:userId", isAuthenticated, async (req, res, next) => {
 router.post("/:id", isAuthenticated, async (req, res, next) => {
   try {
     const postResponse = await Post.findById(req.params.id);
+    // console.log(req.payload._id, "who")
     if (!postResponse) {
       return res.status(400).json({ errorMessage: "Post not found" });
     }
 
-    if (postResponse.authorId === req.payload._id) {
+    if (postResponse.authorId.toString() === req.payload._id) {
+      // console.log("creating a notification...")
       const response = await Notifications.create({
         title: req.body.title,
         message: req.body.message,
         userId: req.payload._id,
         postId: req.params.id,
       })
-      const notificationSave = response.save()
-      res.json(notificationSave)
+      // console.log("Creating another notiginaciotn", response)
+      console.log(postResponse)
+      res.json(response)
     } else {
         res.status(401).json({errorMessage: "nope"})
     }
     // console.log(response);
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 });
 
