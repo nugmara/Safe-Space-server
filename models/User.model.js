@@ -10,10 +10,7 @@ const userSchema = new Schema(
     },
     firstName: String,
     lastName: String,
-    image: {
-      type: String,
-      default: "https://res.cloudinary.com/dhtrxjdas/image/upload/v1678358203/safe-space-app/default-picture_lntg3k.png"
-    },
+    image: String,
     email: {
       type: String,
       required: [true, 'Email is required.'],
@@ -25,7 +22,10 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
-    description: String,
+    description: {
+      type: String,
+      default: ""
+    },
     followers:[ {
       type: Schema.Types.ObjectId,
       ref: "User",

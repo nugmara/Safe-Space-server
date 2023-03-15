@@ -7,7 +7,7 @@ const Post = require("../models/Post.model");
 router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
   try {
     const response = await Comment.find({ post: req.params.id }).select(
-      "content author time"
+      "content author time image"
     ).populate("author", "username")
     res.json(response);
     console.log(response);

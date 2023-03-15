@@ -8,7 +8,8 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
   try {
     const { id } = req.params
     console.log(id)
-    const profileDetails = await User.findById(id);
+    const profileDetails = await User.findById(id).select("username firstName lastName image email description followers totalFollowers")
+    console.log(profileDetails)
     const postOfTheUser = await Post.find({ authorId: id });
     res.json({ profileDetails, postOfTheUser });
   } catch (error) {
