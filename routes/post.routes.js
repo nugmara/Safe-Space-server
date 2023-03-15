@@ -73,7 +73,7 @@ router.post("/:id/like", async (req, res, next) => {
       response.totalLikes -= 1
       await response.save()
     }
-    const authorOfThePost = response.authorId
+    // const authorOfThePost = response.authorId
     
     res.json(response);
   } catch (error) {

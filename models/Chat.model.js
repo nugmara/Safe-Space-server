@@ -10,7 +10,7 @@ const chat = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    message: String,
+    message: Array,
     time: {
       type: Date,
       default: Date.now,

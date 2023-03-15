@@ -26,14 +26,10 @@ const userSchema = new Schema(
       required: [true, 'Password is required.']
     },
     description: String,
-    follow: {
+    followers:[ {
       type: Schema.Types.ObjectId,
       ref: "User",
-    },
-    following: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
+    }],
     totalFollowers: {
       type: Number,
       default: 0
