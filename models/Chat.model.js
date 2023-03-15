@@ -11,10 +11,11 @@ const chat = new mongoose.Schema(
       ref: "User",
     },
     message: String,
-    status: {
-      type: String,
-      enum: ["online", "offline"],
+    time: {
+      type: Date,
+      default: Date.now,
     },
+    
   },
   {
     timestamps: true,
