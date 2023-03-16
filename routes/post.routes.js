@@ -56,12 +56,13 @@ router.delete("/:id", async (req, res, next) => {
 
 // !
 // Tenemos que definir una ruta para dar like a un post
-router.patch("/:id/like", isAuthenticated, async (req, res, next) => {
+router.patch("/like/:id", isAuthenticated, async (req, res, next) => {
   const { id } = req.params;
   const { _id } = req.payload
   try {
     await Post.findByIdAndUpdate(id, {
-      $push: {likes: id}
+      $push: {likes: _id}
+      
     });
     res.json({message: "liked"});
   } catch (error) {
