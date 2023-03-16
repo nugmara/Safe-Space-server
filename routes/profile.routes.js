@@ -4,13 +4,24 @@ const User = require("../models/User.model");
 const Post = require("../models/Post.model");
 
 // GET => detalles del perfil
+router.get("/", isAuthenticated, async (req, res, next) => {
+  try {
+    const { _id } = req.payload
+    const profileDetails = await User.findById(_id).select("username firstName lastName image email description followers totalFollowers")
+    const postOfTheUser = await Post.find({ authorId: _id });
+    console.log(profileDetails, postOfTheUser)
+    res.json({ profileDetails, postOfTheUser });
+  } catch (error) {
+    next(error);
+  }
+});
+// GET => para recoger todos los datos del usuario que buscas
 router.get("/:id", isAuthenticated, async (req, res, next) => {
   try {
     const { id } = req.params
-    console.log(id)
     const profileDetails = await User.findById(id).select("username firstName lastName image email description followers totalFollowers")
-    console.log(profileDetails)
     const postOfTheUser = await Post.find({ authorId: id });
+    console.log(profileDetails, postOfTheUser)
     res.json({ profileDetails, postOfTheUser });
   } catch (error) {
     next(error);
@@ -18,17 +29,17 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
 });
 
 // POST => para el formulario de edit de usuario
-router.patch("/:id/edit", isAuthenticated, async (req, res, next) => {
-  const { id } = req.params;
+router.patch("/edit", isAuthenticated, async (req, res, next) => {
+  const { _id } = req.payload
   const { firstName, lastName, description } = req.body;
   try {
-    const response = await User.findByIdAndUpdate(id, {
+   const response = await User.findByIdAndUpdate(_id, {
       firstName: firstName,
       lastName: lastName,
       description: description
     });
+    console.log(response)
     res.json("todo actualizado");
-    console.log(response);
   } catch (error) {
     next(error);
   }

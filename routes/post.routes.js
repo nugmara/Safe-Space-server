@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   try {
     const response = await Post.find().select(
       "content authorId likes totalLikes time"
-    ).populate("authorId", "username")
+    ).populate("authorId")
     res.json(response);
   } catch (error) {
     next(error);
@@ -30,12 +30,13 @@ router.post("/", isAuthenticated, async (req, res, next) => {
 });
 
 // GET "/api/post/:id" => enviar los detalles de un post
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", isAuthenticated, async (req, res, next) => {
   const { id } = req.params;
   try {
     const response = await Post.findById(id).select(
       "content authorId likes totalLikes time"
-    ).populate("authorId", "username")
+    ).populate("authorId")
+    console.log(response)
     res.json(response);
   } catch (error) {
     next(error);
@@ -55,29 +56,18 @@ router.delete("/:id", async (req, res, next) => {
 
 // !
 // Tenemos que definir una ruta para dar like a un post
-router.post("/:id/like", async (req, res, next) => {
-  console.log(req.body)
+router.patch("/:id/like", isAuthenticated, async (req, res, next) => {
   const { id } = req.params;
-  const { userId } = req.body;
-  console.log(req.body)
+  const { _id } = req.payload
   try {
-  
-    const response = await Post.findById(id);
-    if (!response.likes.includes(userId)) {
-      response.likes.push(userId);
-      response.totalLikes += 1
-      await response.save();
-    } else {
-      response.likes.pull(userId)
-      response.totalLikes -= 1
-      await response.save()
-    }
-    // const authorOfThePost = response.authorId
-    
-    res.json(response);
+    await Post.findByIdAndUpdate(id, {
+      $push: {likes: id}
+    });
+    res.json({message: "liked"});
   } catch (error) {
     next(error);
   }
 });
+// ! evitar el includes poniendo addToSet
 
 module.exports = router;

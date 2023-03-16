@@ -97,7 +97,6 @@ router.post("/signin", async (req, res, next) => {
 
 // GET "/api/auth/verify" => verificar si el usuario esta activo o no
 router.get("/verify", isAuthenticated, (req, res, next) => {
-    // console.log(req.payload);
     res.status(200).json(req.payload)
 })
 

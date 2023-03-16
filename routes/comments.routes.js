@@ -10,7 +10,6 @@ router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
       "content author time image"
     ).populate("author", "username")
     res.json(response);
-    console.log(response);
   } catch (error) {
     next(error);
   }
@@ -20,10 +19,8 @@ router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
 router.post("/:id/comments", isAuthenticated, async (req, res, next) => {
   const { content } = req.body;
   const {id} = req.params
-  console.log(req.payload)
   try {
     const responsePost = await Post.findById(id);
-     console.log(responsePost)
     if (!responsePost) {
       return res.status(404).json({ errorMessage: "Post not found" });
     }
@@ -33,7 +30,6 @@ router.post("/:id/comments", isAuthenticated, async (req, res, next) => {
       post: responsePost.id,
     });
     res.json(responseComments);
-    console.log(responseComments);
   } catch (error) {
     next(error);
   }

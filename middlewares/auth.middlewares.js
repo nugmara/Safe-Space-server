@@ -17,7 +17,6 @@ const isAuthenticated = expressjwt({
     }
     console.log("El token existe y tiene tipo correcto");
     return token;
-    //console.log(req.headers.authorization)
   },
 });
 

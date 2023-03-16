@@ -8,9 +8,8 @@ router.get("/", isAuthenticated, async (req, res, next) => {
     const response = await User.find();
     res.json(response);
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 });
-
 
 module.exports = router;
