@@ -1,6 +1,5 @@
 const isAuthenticated = require("../middlewares/auth.middlewares");
 const Post = require("../models/Post.model");
-const User = require("../models/User.model");
 
 const router = require("express").Router();
 

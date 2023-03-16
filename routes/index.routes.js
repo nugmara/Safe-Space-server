@@ -13,12 +13,6 @@ router.use("/post", postRoutes)
 const commentsRoutes = require("./comments.routes")
 router.use("/post", commentsRoutes)
 
-const chatRoutes = require("./chat.routes")
-router.use("/chats", chatRoutes)
-
-const notificationsRoutes = require("./notifications.routes")
-router.use("/notifications", notificationsRoutes)
-
 const searchForUsers = require("./search.routes")
 router.use("/search", searchForUsers)
 
