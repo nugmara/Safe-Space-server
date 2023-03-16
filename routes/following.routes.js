@@ -2,17 +2,15 @@ const router = require("express").Router();
 const isAuthenticated = require("../middlewares/auth.middlewares");
 const User = require("../models/User.model");
 
-router.post("/idUser", isAuthenticated, async(req, res, next) => {
-  const {idUser} = req.params
-  const {_id} = req.payload._id
+router.patch("/userProfile/:idUser/follow", isAuthenticated, async(req, res, next) => {
+  const {idUser} = req.params._id
+  const {_id} = req.payload
   try {
-    await User.findByIdAndUpdate(idUser, {
-      $push: {followers: _id},
-    })
     await User.findByIdAndUpdate(_id, {
-      $push: {followers: idUser}
+      $push: {followers: + 1},
+
     })
-    res.status(200).json({message: "followed"})
+    res.status(200).json(idUser)
   } catch (error) {
     next(error)
   }

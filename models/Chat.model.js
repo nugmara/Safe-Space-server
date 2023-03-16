@@ -8,9 +8,9 @@ const chat = new mongoose.Schema(
     },
     receiver: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "USer"
     },
-    message: Array,
+    message: String,
     time: {
       type: Date,
       default: Date.now,
