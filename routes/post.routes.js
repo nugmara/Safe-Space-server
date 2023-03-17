@@ -64,7 +64,22 @@ router.patch("/like/:id", isAuthenticated, async (req, res, next) => {
       $push: {likes: _id}
       
     });
-    res.json({message: "liked"});
+    res.status(200).json(id);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// delete
+router.delete("/like/:id", isAuthenticated, async (req, res, next) => {
+  const { id } = req.params;
+  const { _id } = req.payload
+  try {
+    await Post.findByIdAndUpdate(id, {
+      $pull: {likes: _id}
+      
+    });
+    res.status(200).json(id);
   } catch (error) {
     next(error);
   }
