@@ -15,7 +15,7 @@ const isAuthenticated = expressjwt({
       console.log("Tipo de token no valido");
       return null;
     }
-    console.log("El token existe y tiene tipo correcto");
+     console.log("El token existe y tiene tipo correcto");
     return token;
   },
 });

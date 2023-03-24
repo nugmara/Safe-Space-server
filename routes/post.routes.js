@@ -36,7 +36,7 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
     const response = await Post.findById(id).select(
       "content authorId likes totalLikes time"
     ).populate("authorId")
-    console.log(response)
+    // console.log(response)
     res.json(response);
   } catch (error) {
     next(error);

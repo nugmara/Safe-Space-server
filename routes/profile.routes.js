@@ -9,7 +9,7 @@ router.get("/", isAuthenticated, async (req, res, next) => {
     const { _id } = req.payload
     const profileDetails = await User.findById(_id).select("username firstName lastName image email description followers totalFollowers")
     const postOfTheUser = await Post.find({ authorId: _id });
-    console.log(profileDetails, postOfTheUser)
+    // console.log(profileDetails, postOfTheUser)
     res.json({ profileDetails, postOfTheUser });
   } catch (error) {
     next(error);
@@ -21,7 +21,7 @@ router.get("/:id", isAuthenticated, async (req, res, next) => {
     const { id } = req.params
     const profileDetails = await User.findById(id).select("username firstName lastName image email description followers totalFollowers")
     const postOfTheUser = await Post.find({ authorId: id });
-    console.log(profileDetails, postOfTheUser)
+    // console.log(profileDetails, postOfTheUser)
     res.json({ profileDetails, postOfTheUser });
   } catch (error) {
     next(error);
@@ -38,7 +38,7 @@ router.patch("/edit", isAuthenticated, async (req, res, next) => {
       lastName: lastName,
       description: description
     });
-    console.log(response)
+    // console.log(response)
     res.json("todo actualizado");
   } catch (error) {
     next(error);
