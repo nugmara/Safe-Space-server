@@ -9,7 +9,7 @@ router.post("/signup", async (req, res, next) => {
   const { username, firstName, lastName, image, email, password } = req.body;
   // Validación del BE
   // - Validar que los campos no estén vacíos
-  if (!username || !firstName || !lastName || !email || !password) {
+  if (!username || !firstName || !lastName || !email || !password || !image) {
     return res
       .status(400)
       .json({ errorMessage: "All the selectioned fields should not be empty" });
