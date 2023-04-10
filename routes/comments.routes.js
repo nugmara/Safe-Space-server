@@ -2,13 +2,16 @@ const router = require("express").Router();
 const isAuthenticated = require("../middlewares/auth.middlewares");
 const Comment = require("../models/Comment.model");
 const Post = require("../models/Post.model");
+const User = require("../models/User.model")
+
 
 // GET "/api/post/:id/comments" => para enviar la lista de los comentarios
 router.get("/:id/comments", isAuthenticated, async (req, res, next) => {
   try {
     const response = await Comment.find({ post: req.params.id }).select(
       "content author time image"
-    ).populate("author", "username")
+    ).populate({ path: 'author', select: 'username', populate: { path: 'image', select: 'url' } })
+
     res.json(response);
   } catch (error) {
     next(error);

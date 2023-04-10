@@ -14,10 +14,10 @@ const post = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     }],
-    comments: {
+    comments: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
-    },
+    }],
     time: {
       type: Date,
       default: Date.now,
@@ -27,6 +27,7 @@ const post = new mongoose.Schema(
     timestamps: true,
   }
 );
+
 
 const Post = mongoose.model("Post", post);
 
