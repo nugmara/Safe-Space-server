@@ -1,15 +1,11 @@
 const isAuthenticated = require("../middlewares/auth.middlewares");
+const {accessChat, fetchChats} = require("../controllers/chatControllers")
 
 const router = require("express").Router();
 
-router.post ("/", isAuthenticated, (req, res, next) => {
-    const {userId} = req.body;
+router.post("/", isAuthenticated, accessChat)
 
-    if(!userId) {
-        console.log("userId not sent")
-        return res.status(400)
-    }
+router.get("/", isAuthenticated, fetchChats) 
 
-})
-
+  
 module.exports = router;
