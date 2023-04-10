@@ -60,26 +60,34 @@ router.patch("/like/:id", isAuthenticated, async (req, res, next) => {
   const { id } = req.params;
   const { _id } = req.payload
   try {
-    await Post.findByIdAndUpdate(id, {
-      $push: {likes: _id}
-      
-    });
-    res.status(200).json(id);
+    const post = await Post.findById(id);
+    if (post.likes.includes(_id)) {
+      res.status(400).json({ message: "You already liked this post" });
+    } else {
+      await Post.findByIdAndUpdate(id, {
+        $push: {likes: _id}
+      });
+      res.status(200).json(id);
+    }
   } catch (error) {
     next(error);
   }
 });
 
 // delete
-router.delete("/like/:id", isAuthenticated, async (req, res, next) => {
+router.patch("/delete/:id", isAuthenticated, async (req, res, next) => {
   const { id } = req.params;
   const { _id } = req.payload
   try {
-    await Post.findByIdAndUpdate(id, {
-      $pull: {likes: _id}
+    const post = await Post.findById(id);
+    if (post.likes.includes(_id)) {
+      await Post.findByIdAndUpdate(id, {
+        $pull: {likes: _id}
+      });
+      res.status(200).json(id);
+    } 
       
-    });
-    res.status(200).json(id);
+    
   } catch (error) {
     next(error);
   }
