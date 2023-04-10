@@ -14,9 +14,9 @@ const post = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     }],
-    totalLikes: {
-      type: Number,
-      default: 0,
+    comments: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
     },
     time: {
       type: Date,
