@@ -16,6 +16,7 @@ const userSchema = new Schema(
     },
     headerImage: {
       type: String,
+      default: "https://res.cloudinary.com/dhtrxjdas/image/upload/v1681307395/safe-space-app/decorative-funny-wavy-shapes-background-in-an-abstract-style-free-vector_yqne6f.jpg"
     },
     email: {
       type: String,

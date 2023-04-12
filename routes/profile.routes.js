@@ -7,7 +7,7 @@ const Post = require("../models/Post.model");
 router.get("/", isAuthenticated, async (req, res, next) => {
   try {
     const { _id } = req.payload
-    const profileDetails = await User.findById(_id).select("username firstName lastName image email description followers totalFollowers")
+    const profileDetails = await User.findById(_id).select("username firstName lastName image headerImage email description followers totalFollowers")
     const postOfTheUser = await Post.find({ authorId: _id });
     // console.log(profileDetails, postOfTheUser)
     res.json({ profileDetails, postOfTheUser });

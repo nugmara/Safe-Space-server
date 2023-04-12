@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   try {
     const response = await Post.find().select(
       "content authorId likes totalLikes time"
-    ).populate("authorId")
+    ).populate({ path: 'authorId', select: 'username', populate: { path: 'image', select: 'url' } })
     res.json(response);
   } catch (error) {
     next(error);
