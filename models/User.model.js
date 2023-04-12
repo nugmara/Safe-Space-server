@@ -14,6 +14,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    headerImage: {
+      type: String,
+    },
     email: {
       type: String,
       required: [true, 'Email is required.'],
